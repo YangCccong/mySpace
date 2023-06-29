@@ -18,24 +18,4 @@ export class CatsController {
     async findAll(): Promise<Cat []> {
         return this.catsService.findAll()
     }
-    /**
-     * 
-     */
-    // @Get()
-    // findAll(@Req() request: Request): string {
-    //     console.log(request)
-    //     return 'This action returns all cats ～～';
-    // }
-    // @Get('/request')
-    // createRequest(@Req() request: Request): string {
-    //     console.log(request)
-    //     return 'request ~~';
-    // }
-    // @Post()
-    // @HttpCode(201)
-    // @Header('Cache-Control', 'none')
-    // post(): string {
-    //     return 'post ---杨聪聪'
-    // }
-    
 }
