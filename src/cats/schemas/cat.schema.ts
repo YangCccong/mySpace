@@ -8,14 +8,14 @@ export class Cat extends Document {
   @Prop({ required: true })
   name: string;
 
-  @Prop()
-  age: number;
+  // @Prop()
+  // age: number;
 
   @Prop()
-  breed: string;
+  desc: string;
 
-  @Prop([String])
-  tags: string[];
+  // @Prop([String])
+  // tags: string[];
 }
 
 export const CatSchema = SchemaFactory.createForClass(Cat);

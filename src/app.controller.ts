@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Render, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 /**
  * controller
@@ -12,9 +12,19 @@ import { AppService } from './app.service';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
+  /**
+   * 指定模版渲染
+   * @returns 
+   */
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Render('index')
+  root() {
+    return { message: 'hbs 模板渲染' };
+  }
+
+  @Get('/admin')
+  @Render('admin')
+  admin() {
+    return { message: 'hbs 模板渲染' };
   }
 }
