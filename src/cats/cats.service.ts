@@ -7,7 +7,7 @@ import { CreateCatDto } from './dto/create-cat.dto'
 @Injectable()
 export class CatsService {
     constructor(@InjectModel('Cat') private catModel: Model<CatDocument>) {}
-    private readonly cats = [];
+    // private readonly cats = [];
     async create(createCatDto: CreateCatDto): Promise<Cat> {
         const createdCat = new this.catModel(createCatDto);
         return createdCat.save();

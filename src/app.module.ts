@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { RolesModule } from './roles/roles.module';
 
 /**
  * 应用程序的根模块
@@ -12,7 +13,8 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://localhost/my-space'),
-    CatsModule
+    CatsModule,
+    RolesModule
   ],
   controllers: [AppController],
   providers: [AppService],
