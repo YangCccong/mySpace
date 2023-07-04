@@ -1,3 +1,3 @@
 export class RemoveRoleDto {
-    _id?: string;
+    readonly _id?: string;
 }

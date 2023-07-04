@@ -1,27 +1,31 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import * as request from 'supertest';
 
 export type RoleDocument = Role & Document;
 
 @Schema()
 export class Role extends Document {
-  @Prop()
-  name: string;
+  @Prop({ unique: true, request: true })
+  name: String;
 
   @Prop()
-  desc: string;
+  desc: String;
 
   @Prop()
-  createBy: string;
+  createBy: String;
 
   @Prop()
-  modifyBy: string;
+  modifyBy: String;
 
   @Prop()
   createTime: Date;
 
   @Prop()
   modifyTime: Date;
+
+  @Prop()
+  menus: String;
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);
