@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import * as request from 'supertest';
 
 export type RoleDocument = Role & Document;
 

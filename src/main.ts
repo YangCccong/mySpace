@@ -20,6 +20,7 @@ async function bootstrap() {
     // .addTag('cats')
     .build();
   const document = SwaggerModule.createDocument(app, options);
+  console.log(document)
   SwaggerModule.setup('doc', app, document);
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
