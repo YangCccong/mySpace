@@ -1,7 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
+
+// import * as helmet from 'helmet';
+// import * as csurf from 'csurf';
 
 import { join } from 'path';
 
@@ -12,6 +15,16 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
  */
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.setGlobalPrefix('my-space-api/v1');
+  app.enableCors();
+
+  /**
+   * 防止跨站脚本攻击
+   * CSRF保护：跨站点请求伪造
+   */
+  // app.use(helmet());
+  // app.use(csurf());
   
   const options = new DocumentBuilder()
     .setTitle('API 文档')
@@ -32,6 +45,7 @@ async function bootstrap() {
 
   
   await app.listen(3000);
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  // console.log(`Application is running on: ${await app.getUrl()}`);
+  Logger.log(`Application is running on: ${await app.getUrl()}`,)
 }
 bootstrap();
