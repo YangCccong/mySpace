@@ -12,7 +12,6 @@ passport：是node目前最流行的身份认证库，与使用@nestjs/passport�
 
 `nest g resource **[name]**`
 
-
 ```
 nest g resource **[name]**
 **/**/ 简写 res
@@ -72,3 +71,8 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## 数据验证
+
+class-validator class-transformer
+https://github.com/typestack/class-validator#usage
