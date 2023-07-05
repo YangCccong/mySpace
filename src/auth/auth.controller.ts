@@ -13,7 +13,7 @@ import {
 
 
 @Controller('auth')
-@ApiTags('用户登陆')
+@ApiTags('登陆')
 export class AuthController {
     constructor(private authService: AuthService) {}
 
@@ -21,7 +21,6 @@ export class AuthController {
     @UseGuards(AuthGuard('local'))
     @Post('/login')
     async login(@Request() authLoginDto: AuthLoginDto) {
-        // return this.authService.login(req.user);
-        return this.authService.login(authLoginDto);
+        return this.authService.login(authLoginDto['user']);
     }
 }
