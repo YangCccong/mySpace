@@ -2,11 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import * as cookieParser from 'cookie-parser'
+import * as session from 'express-session'
 
 // import * as helmet from 'helmet';
 // import * as csurf from 'csurf';
 
 import { join } from 'path';
+
 
 // 配置 swagger http://localhost:3000/api
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -16,7 +19,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.setGlobalPrefix('my-space-api/v1');
+  app.setGlobalPrefix('my-space-api/');
   app.enableCors();
 
   /**
@@ -39,6 +42,10 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
+
+  app.use(session())
+  //注册cookie
+  app.use(cookieParser('dmyxs'));
 
   // 全局内置管道
   app.useGlobalPipes(new ValidationPipe()); 
