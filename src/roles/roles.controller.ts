@@ -28,11 +28,11 @@ export class RolesController {
         return this.rolesService.saveRole(saveRoleDto)
     }
 
-    @ApiOperation({ summary: '角色删除', description: ''})
-    @Post('/remove-current-role')
-    async removeCurrentRole(@Body() removeRoleDto: RemoveRoleDto) {
-        return this.rolesService.removeCurrentRole(removeRoleDto)
-    }
+    // @ApiOperation({ summary: '角色删除', description: ''})
+    // @Post('/remove-current-role')
+    // async removeCurrentRole(@Body() removeRoleDto: RemoveRoleDto) {
+    //     return this.rolesService.removeCurrentRole(removeRoleDto)
+    // }
 
     @ApiOperation({ summary: '角色列表', description: ''})
     @Get('/role-lists')

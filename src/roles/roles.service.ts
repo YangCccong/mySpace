@@ -14,10 +14,10 @@ export class RolesService {
         return createdCat.save();
     }
 
-    async removeCurrentRole(RemoveRoleDto: RemoveRoleDto) {
-        // console.log(RemoveRoleDto)
-        return this.roleModel.deleteOne(RemoveRoleDto);
-    }
+    // async removeCurrentRole(RemoveRoleDto: RemoveRoleDto) {
+    //     // console.log(RemoveRoleDto)
+    //     return this.roleModel.deleteOne(RemoveRoleDto);
+    // }
 
     async rolesList(): Promise<Role[]> {
         return this.roleModel.find().exec()
