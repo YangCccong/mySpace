@@ -21,8 +21,7 @@ export class AuthController {
     @ApiOperation({ summary: '用户登陆', description: '' })
     @UseGuards(AuthGuard('local'))
     @Post('/login')
-    async login(@Request() authLoginDto: AuthLoginDto, @Session() session) {
-        console.log(session)
+    async login(@Request() authLoginDto: AuthLoginDto) {
         return this.authService.login(authLoginDto['user']);
     }
 
@@ -31,10 +30,7 @@ export class AuthController {
     async code(@Req() req, @Res() res) {
         const svgCaptcha = await this.toolsService.captche(); //创建验证码
         const { text, data } = svgCaptcha
-        // console.log(svgCaptcha)
-        // console.log(req.session)
-
-        req.session.code = text; //使用session保存验证，用于登陆时验证
+        // req.session.code = text; //使用session保存验证，用于登陆时验证
         // console.log(req.session.code);
         res.type('image/svg+xml'); //指定返回的类型
         res.send(data); //给页面返回一张图片

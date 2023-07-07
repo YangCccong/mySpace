@@ -3,10 +3,10 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser'
-import * as session from 'express-session'
+// import * as session from 'express-session'
 
 // import * as helmet from 'helmet';
-// import * as csurf from 'csurf';
+// import  csurf from 'csurf';
 
 import { join } from 'path';
 
@@ -43,7 +43,8 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
 
-  app.use(session())
+  // console.log('session ==== ')
+  // app.use(session())
   //注册cookie
   app.use(cookieParser('dmyxs'));
 

@@ -15,7 +15,7 @@ export class RolesService {
     }
 
     async removeCurrentRole(RemoveRoleDto: RemoveRoleDto) {
-        console.log(RemoveRoleDto)
+        // console.log(RemoveRoleDto)
         return this.roleModel.deleteOne(RemoveRoleDto);
     }
 
