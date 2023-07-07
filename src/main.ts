@@ -36,8 +36,11 @@ async function bootstrap() {
     .addBasicAuth()
     // .addTag('cats')
     .build();
+    options['cors'] = true
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('doc', app, document);
+  console.log(options)
+
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
