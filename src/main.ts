@@ -19,7 +19,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.setGlobalPrefix('my-space-api/');
+  // app.setGlobalPrefix('my-space-api/');
   app.enableCors();
 
   /**
@@ -34,7 +34,7 @@ async function bootstrap() {
     .setDescription('API 文档')
     .setVersion('1.0')
     .addBasicAuth()
-    // .addTag('cats')
+    .addTag('my-space')
     .build();
     options['cors'] = true
   const document = SwaggerModule.createDocument(app, options);

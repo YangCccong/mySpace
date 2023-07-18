@@ -1,3 +1,8 @@
+启动命令
+
+sudo mongod --fork --logpath ~/mongodb/logs/mongodb.log -dbpath ~/mongodb/data/
+
+
 ## 安装依赖
 
 @nestjs/passport：模块将该框架包装在一个 Nest 风格的包中，使其易于集成到 Nest 应用程序中。
