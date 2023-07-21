@@ -16,11 +16,4 @@ export class CreateUserDto {
         message: '密码长度不能超过20位',
     })
     password: string;
-
-    @IsOptional()
-    @IsEnum({ 禁用: 0, 可用: 1 }, {
-        message: 'status只能传入数字0或1',
-    })
-    @Type(() => Number) //如果传递的是string类型，不报错，自动转成number类型
-    status: number;
 }

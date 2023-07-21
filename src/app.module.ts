@@ -18,7 +18,7 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     ThrottlerModule.forRoot({
       ttl: 60,  //1分钟
-      limit: 20, //请求10次
+      limit: 100, //请求10次
     }),
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://localhost/my-space'),

@@ -3,13 +3,9 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser'
-// import * as session from 'express-session'
-
-// import * as helmet from 'helmet';
-// import  csurf from 'csurf';
+import * as session from 'express-session'
 
 import { join } from 'path';
-
 
 // 配置 swagger http://localhost:3000/api
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -18,7 +14,6 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
  */
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-
   // app.setGlobalPrefix('my-space-api/');
   app.enableCors();
 
@@ -39,24 +34,18 @@ async function bootstrap() {
     options['cors'] = true
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('doc', app, document);
-  console.log(options)
 
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
-
-  // console.log('session ==== ')
-  // app.use(session())
   //注册cookie
   app.use(cookieParser('dmyxs'));
-
+  app.use(session());
   // 全局内置管道
-  app.useGlobalPipes(new ValidationPipe()); 
+  app.useGlobalPipes(new ValidationPipe());
 
-  
   await app.listen(3000);
-  // console.log(`Application is running on: ${await app.getUrl()}`);
   Logger.log(`Application is running on: ${await app.getUrl()}`,)
 }
 bootstrap();

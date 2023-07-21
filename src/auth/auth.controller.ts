@@ -30,8 +30,7 @@ export class AuthController {
     async code(@Req() req, @Res() res) {
         const svgCaptcha = await this.toolsService.captche(); //创建验证码
         const { text, data } = svgCaptcha
-        // req.session.code = text; //使用session保存验证，用于登陆时验证
-        // console.log(req.session.code);
+        req.session.code = text; //使用session保存验证，用于登陆时验证
         res.type('image/svg+xml'); //指定返回的类型
         res.send(data); //给页面返回一张图片
     }
