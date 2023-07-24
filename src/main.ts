@@ -4,6 +4,8 @@ import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser'
 import * as session from 'express-session'
+import { HttpExceptionFilter } from './filters/http-exception.filter';
+import { TransformInterceptor } from './filters/transform.interceptor'
 
 import { join } from 'path';
 
@@ -44,6 +46,10 @@ async function bootstrap() {
   app.use(session());
   // 全局内置管道
   app.useGlobalPipes(new ValidationPipe());
+  // 全局注册错误的过滤器
+  app.useGlobalFilters(new HttpExceptionFilter());
+  // 全局注册拦截器
+  app.useGlobalInterceptors(new TransformInterceptor());
 
   await app.listen(3000);
   Logger.log(`Application is running on: ${await app.getUrl()}`,)

@@ -1,8 +1,10 @@
-import { Controller, Body, Post, Get } from '@nestjs/common';
+import { Controller, Body, Post, Get, UseFilters, ForbiddenException } from '@nestjs/common';
 import { RolesService } from './roles.service'
 import { SaveRoleDto } from './dto/save-role.dto';
 import { RemoveRoleDto } from './dto/remove-role.dto';
-
+// import { HttpExceptionFilter } from '../filters/http-exception.filter';
+import { HttpException } from '@nestjs/common';
+   
 import {
     ApiOperation,
     ApiTags,
@@ -37,6 +39,9 @@ export class RolesController {
     @ApiOperation({ summary: '角色列表', description: ''})
     @Get('/role-lists')
     async rolesList() {
+        // 主动触发异常
+        // throw new HttpException('请求失败', 200);
+        // throw new ForbiddenException('请求失败', 400);
         return this.rolesService.rolesList()
     }
 }
