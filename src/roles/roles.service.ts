@@ -14,6 +14,11 @@ export class RolesService {
         return createdCat.save();
     }
 
+    async updataRole(SaveRoleDto: SaveRoleDto) {
+        const { _id } = SaveRoleDto
+        return this.roleModel.findOneAndUpdate({ _id }, SaveRoleDto)
+    }
+
     async removeCurrentRole(RemoveRoleDto: RemoveRoleDto) {
         return this.roleModel.deleteOne(RemoveRoleDto);
     }

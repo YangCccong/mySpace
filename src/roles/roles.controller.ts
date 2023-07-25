@@ -21,14 +21,13 @@ export class RolesController {
     @ApiBody({ type: SaveRoleDto, description: '输入用户名和密码' })
     @Post('/save-current-role')
     async saveRole(@Body() saveRoleDto: SaveRoleDto) {
-        /**
-         * 判断ID
-         *      存在： 进行编辑
-         *      不存在：新增
-         *          - 先判断当前角色名称是否存在,没有的话进行新增
-         */
-        console.log(saveRoleDto)
-        return this.rolesService.saveRole(saveRoleDto)
+        const {_id} = saveRoleDto
+        if(_id) {
+            return this.rolesService.updataRole(saveRoleDto)
+        } else {
+            delete saveRoleDto._id
+            return this.rolesService.saveRole(saveRoleDto)
+        }
     }
 
     @ApiOperation({ summary: '角色删除', description: ''})

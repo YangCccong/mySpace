@@ -21,7 +21,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
  
         const exceptionStr = exception ? `message:${exception['message']},stack:${exception['stack']}` : ''
  
-        console.log('全局异常日志： %s %s %s error: %s', request.method, request.url, request.body, exceptionStr)
+        // console.log('全局异常日志： %s %s %s error: %s', request.method, request.url, request.body, exceptionStr)
  
         response.status(status).json({
             status,
