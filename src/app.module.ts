@@ -10,7 +10,7 @@ import { AppService } from './app.service';
 import { RolesModule } from './roles/roles.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-
+import { MenusModule } from './menus/menus.module';
 /**
  * 应用程序的根模块
  */
@@ -22,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://localhost/my-space'),
+    MenusModule,
     RolesModule,
     UserModule,
     AuthModule
