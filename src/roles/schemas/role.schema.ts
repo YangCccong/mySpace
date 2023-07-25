@@ -24,7 +24,7 @@ export class Role extends Document {
   modifyTime: Date;
 
   @Prop()
-  menus: String;
+  routes: [];
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);

@@ -3,7 +3,7 @@ import { RolesService } from './roles.service'
 import { SaveRoleDto } from './dto/save-role.dto';
 import { RemoveRoleDto } from './dto/remove-role.dto';
 // import { HttpExceptionFilter } from '../filters/http-exception.filter';
-import { HttpException } from '@nestjs/common';
+import { HttpException, BadRequestException } from '@nestjs/common';
    
 import {
     ApiOperation,
@@ -27,14 +27,15 @@ export class RolesController {
          *      不存在：新增
          *          - 先判断当前角色名称是否存在,没有的话进行新增
          */
+        console.log(saveRoleDto)
         return this.rolesService.saveRole(saveRoleDto)
     }
 
-    // @ApiOperation({ summary: '角色删除', description: ''})
-    // @Post('/remove-current-role')
-    // async removeCurrentRole(@Body() removeRoleDto: RemoveRoleDto) {
-    //     return this.rolesService.removeCurrentRole(removeRoleDto)
-    // }
+    @ApiOperation({ summary: '角色删除', description: ''})
+    @Post('/remove-current-role')
+    async removeCurrentRole(@Body() removeRoleDto: RemoveRoleDto) {
+        return this.rolesService.removeCurrentRole(removeRoleDto)
+    }
 
     @ApiOperation({ summary: '角色列表', description: ''})
     @Get('/role-lists')

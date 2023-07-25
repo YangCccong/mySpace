@@ -5,6 +5,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser'
 import * as session from 'express-session'
 import { HttpExceptionFilter } from './filters/http-exception.filter';
+import { AllExceptionsFilter } from './filters/all-exceptions.filter';
 import { TransformInterceptor } from './filters/transform.interceptor'
 
 import { join } from 'path';
@@ -47,7 +48,7 @@ async function bootstrap() {
   // 全局内置管道
   app.useGlobalPipes(new ValidationPipe());
   // 全局注册错误的过滤器
-  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter(), new AllExceptionsFilter());
   // 全局注册拦截器
   app.useGlobalInterceptors(new TransformInterceptor());
 
