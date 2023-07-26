@@ -28,9 +28,6 @@ export class Menu extends Document {
 
     @Prop()
     menuFunctions?: [];
-
-    // @Prop()
-    // children?: [];
 }
 
 export const MenuSchema = SchemaFactory.createForClass(Menu);

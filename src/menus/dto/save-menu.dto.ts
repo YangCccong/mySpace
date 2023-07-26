@@ -8,6 +8,9 @@ export class SaveMenuDto {
     @ApiProperty({ description: '父级菜单', default: '' })
     parentId: string;
 
+    @ApiProperty({ description: '是否隐藏', default: '' })
+    hidden: boolean
+
     @ApiProperty({ description: '跳转方式', default: '1' })
     jumpMethod: string;
 
@@ -25,7 +28,4 @@ export class SaveMenuDto {
 
     @ApiProperty({ description: '菜单功能', default: [] })
     menuFunctions?: [];
-
-    // @ApiProperty({ description: '菜单功能', default: [] })
-    // children?: [];
 }

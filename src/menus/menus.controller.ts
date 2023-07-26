@@ -2,7 +2,7 @@ import { Controller, Body, Post, Get, UseFilters, ForbiddenException } from '@ne
 import { MenusService } from './menus.service'
 import { SaveMenuDto } from './dto/save-menu.dto';
 import { RemoveMenuDto } from './dto/remove-menu.dto';
-   
+import { arrToTree } from '../utils/index'
 import {
     ApiOperation,
     ApiTags,
@@ -33,6 +33,7 @@ export class MenusController {
     @ApiOperation({ summary: '菜单列表', description: ''})
     @Get('/menu-lists')
     async menusList() {
-        return this.menusService.menusList()
+        const menusList = await this.menusService.menusList()
+        return arrToTree(menusList, { pid: 'parentId', id: '_id' })
     }
 }

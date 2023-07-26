@@ -20,11 +20,12 @@ export class MenusService {
     }
 
     async removeCurrentMenu(RemoveMenuDto: RemoveMenuDto) {
-        return this.menuModel.deleteOne(RemoveMenuDto);
+        const { _id } = RemoveMenuDto
+        return this.menuModel.findByIdAndRemove({ _id });
+        // return this.menuModel.deleteOne(RemoveMenuDto);
     }
-
     
     async menusList(): Promise<Menu[]> {
-        return this.menuModel.find().exec()
+        return await this.menuModel.find().exec()
     }
 }
