@@ -19,8 +19,8 @@ export class RolesService {
         return this.roleModel.findOneAndUpdate({ _id }, SaveRoleDto)
     }
 
-    async removeCurrentRole(RemoveRoleDto: RemoveRoleDto) {
-        return this.roleModel.deleteOne(RemoveRoleDto);
+    async removeCurrentRole(removeRoleDto: RemoveRoleDto) {
+        return this.roleModel.deleteOne(removeRoleDto);
     }
 
     async rolesList(): Promise<Role[]> {
