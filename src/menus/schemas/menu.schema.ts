@@ -6,10 +6,19 @@ export type MenuDocument = Menu & Document;
 @Schema()
 export class Menu extends Document {
     @Prop()
+    type: string;
+
+    @Prop()
     name: string;
 
     @Prop()
+    permissionCode: string;
+
+    @Prop()
     parentId: string;
+
+    @Prop()
+    hidden: boolean;
 
     @Prop()
     jumpMethod: string;
@@ -25,9 +34,6 @@ export class Menu extends Document {
 
     @Prop()
     state: boolean;
-
-    @Prop()
-    menuFunctions?: [];
 }
 
 export const MenuSchema = SchemaFactory.createForClass(Menu);

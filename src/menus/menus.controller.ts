@@ -34,6 +34,7 @@ export class MenusController {
     @Get('/menu-lists')
     async menusList() {
         const menusList = await this.menusService.menusList()
-        return arrToTree(menusList, { pid: 'parentId', id: '_id' })
+        // return menusList
+        return arrToTree(menusList, { parentId: 'parentId', id: '_id' })
     }
 }
