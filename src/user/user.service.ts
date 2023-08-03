@@ -19,7 +19,9 @@ export class UserService {
   }
 
   async removeCurrentUser(removeRoleDto) {
-    return this.userModel.deleteOne(removeRoleDto);
+    const { _id } = removeRoleDto
+    return this.userModel.findByIdAndRemove({ _id });
+    // return this.userModel.deleteOne(removeRoleDto);
   }
 
   async usersList(): Promise<User[]> {
