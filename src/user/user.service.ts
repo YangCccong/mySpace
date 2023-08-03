@@ -8,13 +8,24 @@ import { User, UserDocument } from './schemas/user.schema'
 export class UserService {
   constructor(@InjectModel('User') private userModel: Model<UserDocument>) { }
 
-  async createUser(username: string, password: string): Promise<User> {
-    return this.userModel.create({
-      username,
-      password,
-    });
+  async createUser(user: CreateUserDto): Promise<User> {
+    return this.userModel.create(user);
   }
-  
+
+
+  async updataUser(SaveRoleDto) {
+    const { _id } = SaveRoleDto
+    return this.userModel.findOneAndUpdate({ _id }, SaveRoleDto)
+  }
+
+  async removeCurrentUser(removeRoleDto) {
+    return this.userModel.deleteOne(removeRoleDto);
+  }
+
+  async usersList(): Promise<User[]> {
+    return this.userModel.find().exec()
+  }
+
   async getUser(query: object): Promise<User> {
     return this.userModel.findOne(query);
   }
