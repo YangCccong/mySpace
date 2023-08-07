@@ -1,3 +1,4 @@
+const fs = require('fs')
 export function arrToTree(array, paramsKey) {
     // parentId 和id 都是字符串
     const treeList = [],
@@ -47,4 +48,28 @@ export function arrToTree(array, paramsKey) {
     //     return arr;
     // }
     // return treeLoop(copyArr, array)
+}
+
+export function whiteFile(newSuggestions) {
+    fs.readFile('../../json/suggestions.json', 'utf8', (err, data) => {
+        if (err) throw err;
+        // 创建新数据
+        // const newUser = {
+        //   "name": "Mary",
+        //   "age": "18",
+        //   "city": "San Francisco"
+        // };
+      
+        // 解析原始json数据
+        const userData = JSON.parse(data);
+      
+        // 添加新数据
+        Object.assign(userData, newSuggestions);
+      
+        // 写入json文件
+        fs.writeFile('/Users/apple/Downloads/user.json', JSON.stringify(userData), (err) => {
+          if (err) throw err;
+          console.log('The file has been saved!');
+        });
+      });
 }
