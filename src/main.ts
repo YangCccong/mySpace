@@ -7,8 +7,9 @@ import * as session from 'express-session'
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { AllExceptionsFilter } from './filters/all-exceptions.filter';
 import { TransformInterceptor } from './filters/transform.interceptor'
-
+import * as hbs from 'hbs';
 import { join } from 'path';
+hbs.registerPartials(join(__dirname, '..', 'views/components'));
 
 // 配置 swagger http://localhost:3000/api
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
