@@ -2,7 +2,6 @@ import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -16,10 +15,6 @@ import { MenusModule } from './menus/menus.module';
  */
 @Module({
   imports: [
-    ThrottlerModule.forRoot({
-      ttl: 15 * 60,  //1分钟
-      limit: 1000, //请求10次
-    }),
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://localhost/my-space'),
     MenusModule,
@@ -29,11 +24,7 @@ import { MenusModule } from './menus/menus.module';
   ],
   controllers: [AppController],
   providers: [
-    AppService,
-    {
-      provide: APP_GUARD,
-      useClass: ThrottlerGuard,
-    },
+    AppService
   ],
 })
 export class AppModule {}

@@ -1,58 +1,36 @@
-<div class="row" id="messageBoard">
-    <div class="col-lg-6 ">
-        <div class="form-wrapper">
-
-            <!-- form-item -->
-            <div class="form-item">
-                <label class="form__label fa fa-user"> </label>
-                <input v-model="contactInformation" class="form-control" type="text" name="input" placeholder="联系方式" required="required" />
-            </div><!-- End / form-item -->
-
-
-            <!-- form-item -->
-            <div class="form-item form-item--half">
-                <label class="form__label fa fa-edit"> </label>
-                <input v-model="title" class="form-control" type="text" name="input" placeholder="标题" />
-            </div><!-- End / form-item -->
-
-
-            <!-- form-item -->
-            <div class="form-item">
-                <label class="form__label fa fa-comments-o"> </label>
-                <textarea v-model="content" class="form-control" placeholder="内容" rows="15"></textarea>
-            </div><!-- End / form-item -->
-
-
-            <!-- form-item -->
-            <div class="form-item awe-text-center">
-                <a class="awe-btn awe-btn--pill " @click="submitMessage">提交</a>
-            </div><!-- End / form-item -->
-
-        </div>
+<div id="messageBoard">
+    <div class="form-item">
+        <label class="form__label fa fa-user"> </label>
+        <input v-model="contactInformation" class="form-control" type="text" name="input" placeholder="联系方式"
+            required="required" />
     </div>
-    <div class="col-lg-6 ">
-        <div class="box-map"></div>
+    <div class="form-item form-item--half">
+        <label class="form__label fa fa-edit"> </label>
+        <input v-model="title" class="form-control" type="text" name="input" placeholder="标题" />
+    </div>
+    <div class="form-item">
+        <label class="form__label fa fa-comments-o"> </label>
+        <textarea v-model="content" class="form-control" placeholder="内容" rows="15"></textarea>
+    </div>
+    <div class="form-item awe-text-center">
+        <a class="awe-btn awe-btn--pill " @click="submitMessage">提交</a>
     </div>
 </div>
 <script>
-  PetiteVue.createApp({
-    messageBoardForm: {
-        name: '',
+    PetiteVue.createApp({
+        contactInformation: '',
+        title: '',
         content: '',
-    },
-    contactInformation: '',
-    title: '',
-    content: '',
-    async submitMessage() {
-        const { contactInformation, title, content } = this
-        if(!contactInformation || !title || !content) return alert('请完善输入内容')
-        const form = {
-            content,
-            name: `${contactInformation}_${title}_web`,
+        async submitMessage() {
+            const { contactInformation, title, content } = this
+            if (!contactInformation || !title || !content) return alert('请完善输入内容')
+            const form = {
+                content,
+                name: `${contactInformation}_${title}_web`,
+            }
+            alert('提交成功')
+            const res = await axios.post('/auth/suggestions', form)
         }
-        alert('提交成功')
-        const res = await axios.post('/auth/suggestions', form)
-    }
-  }).mount('#messageBoard')
-  console.log('留言板', 'vue 测试')
+    }).mount('#messageBoard')
+    console.log('留言板', 'vue 测试')
 </script>

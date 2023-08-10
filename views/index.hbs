@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
 	<title>个人主页</title>
 	<meta charset="utf-8">
@@ -15,6 +16,7 @@
 	<script src="https://unpkg.com/petite-vue"></script>
 	<script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
 </head>
+
 <body>
 	<div class="page-wrap" id="root">
 		<!-- header -->
@@ -1228,7 +1230,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
 			</section>
 			<!-- End / Section -->
@@ -1238,7 +1240,16 @@
 			<!-- Section -->
 			<section class="awe-section" id="id-6">
 				<div class="container">
-					{{> messageBoard }}
+					<div class="row">
+						<div class="col-lg-6 ">
+							<div class="form-wrapper">
+								{{> messageBoard }}
+							</div>
+							<div class="col-lg-6 ">
+								<div class="box-map"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</section>
 			<!-- End / Section -->
@@ -1287,4 +1298,5 @@
 	<script type="text/javascript" src="index/assets/vendors/waterpipe/waterpipe.js"></script>
 	<script type="text/javascript" src="index/assets/js/main.js"></script>
 </body>
+
 </html>
