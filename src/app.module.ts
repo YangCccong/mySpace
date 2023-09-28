@@ -1,4 +1,3 @@
-import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
@@ -10,6 +9,7 @@ import { RolesModule } from './roles/roles.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { MenusModule } from './menus/menus.module';
+import { WxModule } from './wx/wx.module';
 /**
  * 应用程序的根模块
  */
@@ -20,7 +20,8 @@ import { MenusModule } from './menus/menus.module';
     MenusModule,
     RolesModule,
     UserModule,
-    AuthModule
+    AuthModule,
+    WxModule
   ],
   controllers: [AppController],
   providers: [

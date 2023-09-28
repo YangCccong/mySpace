@@ -1,4 +1,4 @@
-import { Controller, Request, Post, Body, UseGuards, Param, Delete, Get } from '@nestjs/common';
+import { Controller, Request, Post, Body, UseGuards, Param, Delete, Get, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto, RemoveUserDto } from './dto/create-user.dto';
 import { User } from './schemas/user.schema';
@@ -44,9 +44,14 @@ export class UserController {
   @ApiOperation({ summary: '用户列表', description: ''})
   @Get('/users-lists')
   async usersList() {
-      // 主动触发异常
-      // throw new HttpException('请求失败', 200);
-      // throw new ForbiddenException('请求失败', 400);
       return this.userService.usersList()
   }
+
+  @ApiOperation({ summary: '用户分配角色', description: ''})
+  @Post('/assign-roles')
+  async usersAssignRoles(@Body() data) {
+    return this.userService.createAssignRoles(data)
+  }
+
+
 }

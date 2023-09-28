@@ -8,6 +8,8 @@ import { UserService } from "src/user/user.service";
 import { MongooseModule } from "@nestjs/mongoose";
 import { User, UserSchema } from "src/user/schemas/user.schema";
 import { LocalStrategy } from './local.auth';
+import { JwtStrategy } from './jwt.strategy';
+import { jwtConstants } from './config'
 
 import { ToolsService } from 'src/utils/tools.service';
 import { Suggestions, SuggestionsSchema } from './schemas/suggestions.schema';
@@ -18,16 +20,22 @@ import { APP_GUARD } from '@nestjs/core';
   imports: [
     ThrottlerModule.forRoot({
       ttl: 1 * 60,
-      limit: 5, // 请求10次
+      limit: 100, // 请求10次
     }),
-    UserModule, PassportModule, JwtModule.register({
-    secret: 'secretKey',
-    signOptions: { expiresIn: '60s' },
-  }), MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), MongooseModule.forFeature([{ name: Suggestions.name, schema: SuggestionsSchema }])],
+    UserModule,
+    PassportModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '8h' }, // token 过期 
+    }),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: Suggestions.name, schema: SuggestionsSchema }])
+  ],
   providers: [
     AuthService,
     UserService,
     LocalStrategy,
+    JwtStrategy,
     ToolsService,
     {
       provide: APP_GUARD,
@@ -35,5 +43,6 @@ import { APP_GUARD } from '@nestjs/core';
     },
   ],
   controllers: [AuthController],
+  exports: [AuthService],
 })
-export class AuthModule {}
+export class AuthModule { }

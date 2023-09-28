@@ -18,4 +18,5 @@ export class User extends Document {
   email: string;
 }
 
+
 export const UserSchema = SchemaFactory.createForClass(User);
