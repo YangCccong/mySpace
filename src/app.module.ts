@@ -10,13 +10,18 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { MenusModule } from './menus/menus.module';
 import { WxModule } from './wx/wx.module';
+
 /**
  * 应用程序的根模块
  */
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost/my-space'),
+    MongooseModule.forRoot(`mongodb://localhost`, {
+      dbName: 'my-space',
+      user: 'root',
+      pass: '6PBqFZ7WarahG29'
+    }),
     MenusModule,
     RolesModule,
     UserModule,
