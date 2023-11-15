@@ -10,6 +10,9 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { MenusModule } from './menus/menus.module';
 import { WxModule } from './wx/wx.module';
+import { ArticleController } from './article/article.controller';
+import { ArticleService } from './article/article.service';
+import { ArticleModule } from './article/article.module';
 
 /**
  * 应用程序的根模块
@@ -26,7 +29,8 @@ import { WxModule } from './wx/wx.module';
     RolesModule,
     UserModule,
     AuthModule,
-    WxModule
+    WxModule,
+    ArticleModule
   ],
   controllers: [AppController],
   providers: [
