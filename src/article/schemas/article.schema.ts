@@ -26,8 +26,8 @@ export class Article extends Document {
   @Prop()
   pageviews: String;
 
-  @Prop()
-  platforms: [];
+  // @Prop()
+  // platforms: [];
 
   @Prop()
   reviewer: String;

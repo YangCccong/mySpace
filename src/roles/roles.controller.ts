@@ -5,6 +5,8 @@ import { RemoveRoleDto } from './dto/remove-role.dto';
 import { AuthGuard } from '@nestjs/passport';
 // import { HttpExceptionFilter } from '../filters/http-exception.filter';
 import { HttpException, BadRequestException } from '@nestjs/common';
+import { RoleMenusService } from './RoleMenus/role-menus.service'
+
    
 import {
     ApiOperation,
@@ -18,7 +20,7 @@ import {
 @ApiTags('角色管理')
 
 export class RolesController {
-    constructor(private rolesService: RolesService) {}
+    constructor(private rolesService: RolesService, private RoleMenusService: RoleMenusService) {}
 
     @ApiOperation({ summary: '角色创建/修改', description: ''})
     @ApiBody({ type: SaveRoleDto, description: '输入用户名和密码' })
@@ -26,13 +28,14 @@ export class RolesController {
     @UseGuards(AuthGuard('jwt'))
 
     async saveRole(@Body() saveRoleDto: SaveRoleDto) {
-        const {_id} = saveRoleDto
-        if(_id) {
-            return this.rolesService.updataRole(saveRoleDto)
-        } else {
-            delete saveRoleDto._id
-            return this.rolesService.saveRole(saveRoleDto)
-        }
+        console.log(SaveRoleDto)
+        const { _id, routes } = saveRoleDto
+        const promises = routes.map(menuId => {
+            return this.RoleMenusService.createRoleMenus({ roleId: _id, menuId })
+        })
+        Promise.all(promises).then(res => {
+            return res
+        })
     }
 
     @ApiOperation({ summary: '角色删除', description: ''})

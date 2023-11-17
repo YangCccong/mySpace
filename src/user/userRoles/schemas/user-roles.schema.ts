@@ -9,7 +9,7 @@ export class UserRoles extends Document {
   userId: string;
 
   @Prop()
-  rolesIds: string;
+  roleId: string;
 }
 
 

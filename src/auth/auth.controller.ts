@@ -51,14 +51,12 @@ export class AuthController {
     @ApiOperation({ summary: '投诉建议', description: '' })
     @Post('/suggestions')
     async suggestions(@Body() suggestions: SuggestionsDto) {
-        console.log(suggestions)
         return this.authService.suggestions(suggestions)
     }
 
     @ApiOperation({ summary: '腾讯云测试', description: '' })
     @Post('/test')
     async test(@Body() body) {
-        console.log(body)
         const params = {
             RspImgType: 'url',
         }

@@ -11,7 +11,9 @@ export class ArticleDto {
      * sourceURL status timestamp title type
      */
     _id?: string;
-
+    @ApiProperty({ description: '作者', default: '青山常有雾' })
+    @IsNotEmpty({ message: '请输入作者' })
+    author: string;
 
     @ApiProperty({ description: '内容', default: '抽象内容' })
     @IsNotEmpty({ message: '请输入内容' })
@@ -32,8 +34,8 @@ export class ArticleDto {
     @ApiProperty({ description: '视图', default: 1 })
     pageviews: number;
 
-    @ApiProperty({ description: '平台', default: [] })
-    platforms: [];
+    // @ApiProperty({ description: '平台', default: [] })
+    // platforms: [];
 
     @ApiProperty({ description: '视图1', default: '视图1' })
     reviewer: string;

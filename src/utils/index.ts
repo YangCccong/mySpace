@@ -17,7 +17,6 @@ export function arrToTree(array, paramsKey) {
         item.children = []
         map[item[id]] = item
     });
-    console.log(map)
     copyArr.forEach(item => {
         const parent = map[item[parentId]]
         if (parent) {

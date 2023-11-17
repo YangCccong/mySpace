@@ -9,13 +9,10 @@ export class WxService {
   private secret = 'b449fd44e3ab0869ecae4a7cbbeb10f0'
   private grant_type = 'authorization_code'
   async login(loginDTO): Promise<any> {
-    console.log(loginDTO, 'loginDTO ===>>>')
     const { code, iv, encryptedData } = loginDTO
-    console.log(1111, code, 'code ====>>>> ')
     const url = `https://api.weixin.qq.com/sns/jscode2session?grant_type=${this.grant_type}&appid=${this.appid}&secret=${this.secret}&js_code=${code}`
     const info = await axios.get(url) // 获取openid和session_key
     let token = ''
-    console.log(info)
     // 如果openid不存在则为新用户
     // const hasUser = await this.userRepository.findOne({ where: { openid: info.data.openid } });
     // if (hasUser) {

@@ -4,13 +4,12 @@ import { Model } from 'mongoose'
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './schemas/user.schema'
-import { UserRoles, UserRolesDocument } from './schemas/user-roles.schema'
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel('User') private userModel: Model<UserDocument>,
-    // @InjectModel('UserRoles') private userRolesModel: Model<UserRolesDocument>,
-  ) {}
+  ) {
+  }
 
   async createUser(user: CreateUserDto): Promise<User> {
     return this.userModel.create(user);
@@ -32,7 +31,7 @@ export class UserService {
     return this.userModel.find().exec()
   }
 
-  async createAssignRoles(UserRoles: any): Promise<UserRoles> {
+  async createAssignRoles(UserRoles: any): Promise<[]> {
     console.log(UserRoles, 'user_roles ===>>> ')
     return UserRoles
     // return this.userRolesModel.create(UserRoles);

@@ -13,6 +13,7 @@ hbs.registerPartials(join(__dirname, '..', 'views/components'));
 
 // 配置 swagger http://localhost:3000/api
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import * as bodyParser from 'body-parser';
 /**
  * 应用程序的入口文件。NestFactory 用来创建 nest应用实例。
  */
@@ -38,7 +39,8 @@ async function bootstrap() {
     // options['cors'] = false
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('doc', app, document);
-
+  app.use(bodyParser.json({limit: '50mb'}));
+  app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));

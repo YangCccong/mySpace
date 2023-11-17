@@ -6,7 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { SuggestionsDto } from './dto/suggestions.dto';
 import { Model } from 'mongoose';
 import { Suggestions, SuggestionsDocument } from './schemas/suggestions.schema';
-import { HttpException, BadRequestException } from '@nestjs/common';
+import { HttpException } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {

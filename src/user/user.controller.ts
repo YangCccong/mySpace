@@ -1,5 +1,6 @@
-import { Controller, Request, Post, Body, UseGuards, Param, Delete, Get, Query } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { UserService } from './user.service';
+import { UserRolesService } from './userRoles/userRoles.service'
 import { CreateUserDto, RemoveUserDto } from './dto/create-user.dto';
 import { User } from './schemas/user.schema';
 import * as bcrypt from 'bcrypt';
@@ -11,7 +12,7 @@ import {
 @ApiTags('用户管理')  // 设置分类
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService, private readonly UserRolesService: UserRolesService) {}
   
   @ApiOperation({ summary: '用户创建', description: '' })
   @Post('/signup')
@@ -23,7 +24,6 @@ export class UserController {
         return this.userService.updataUser(user)
     } else {
         delete user._id
-        console.log(user, '=====>>>')
         const hashedPassword = await bcrypt.hash(password, saltOrRounds);
         const result = await this.userService.createUser({
           ...user,
@@ -37,7 +37,6 @@ export class UserController {
   @ApiOperation({ summary: '用户删除', description: ''})
   @Post('/remove-current-user')
   async removeCurrentUser(@Body() removeRoleDto: RemoveUserDto) {
-    console.log(removeRoleDto)
     return this.userService.removeCurrentUser(removeRoleDto)
   }
 
@@ -50,8 +49,12 @@ export class UserController {
   @ApiOperation({ summary: '用户分配角色', description: ''})
   @Post('/assign-roles')
   async usersAssignRoles(@Body() data) {
-    return this.userService.createAssignRoles(data)
+    const { userId, rolesIds } = data
+    const promises = rolesIds.map(roleId => {
+      return this.UserRolesService.createUserRole({userId, roleId})
+    })
+    Promise.all(promises).then(res => {
+      return res
+    })
   }
-
-
 }
