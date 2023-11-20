@@ -5,9 +5,10 @@ import { Role, RoleDocument } from './schemas/role.schema';
 
 import { SaveRoleDto } from './dto/save-role.dto';
 import { RemoveRoleDto } from './dto/remove-role.dto';
+import { RoleMenusService } from './RoleMenus/role-menus.service'
 @Injectable()
 export class RolesService {
-    constructor(@InjectModel('Role') private roleModel: Model<RoleDocument>) { }
+    constructor(@InjectModel('Role') private roleModel: Model<RoleDocument>, private RoleMenusService: RoleMenusService) { }
 
     async saveRole(SaveRoleDto: SaveRoleDto) {
         const createdCat = new this.roleModel(SaveRoleDto);
@@ -27,4 +28,16 @@ export class RolesService {
     async rolesList(): Promise<Role[]> {
         return this.roleModel.find().exec()
     }
+
+    async getRoleInfoByIds(roleIds) {
+        const roles = await this.roleModel.find({ _id: { $in: roleIds }}, {name: 1, _id: 0})
+        console.log(roleIds, roles)
+        const menus = await this.RoleMenusService.getMenuIdsByRoleId(roleIds)
+        console.log(menus, 'menus ====>>> ')
+        return {
+            roles,
+            menus
+        }
+    }
+    
 }

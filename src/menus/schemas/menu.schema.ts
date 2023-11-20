@@ -12,6 +12,9 @@ export class Menu extends Document {
     name: string;
 
     @Prop()
+    title: string;
+    
+    @Prop()
     permissionCode: string;
 
     @Prop()

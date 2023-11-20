@@ -22,9 +22,7 @@ export class Role extends Document {
 
   @Prop()
   modifyTime: Date;
-
-  @Prop()
-  routes: [];
+  
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);

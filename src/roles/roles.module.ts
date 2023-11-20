@@ -8,6 +8,7 @@ import { UserRolesModule } from './RoleMenus/role-menus.module'
 @Module({
   imports: [MongooseModule.forFeature([{ name: Role.name, schema: RoleSchema }]), UserRolesModule],
   controllers: [RolesController],
-  providers: [RolesService]
+  providers: [RolesService],
+  exports: [RolesService]
 })
 export class RolesModule {}

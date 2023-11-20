@@ -5,6 +5,9 @@ export type ArticleDocument = Article & Document;
 
 @Schema()
 export class Article extends Document {
+  @Prop({select: false})
+  __v: Number;
+
   @Prop()
   abstractContent: String;
 

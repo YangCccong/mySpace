@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common"
+import { Module, forwardRef } from "@nestjs/common"
 import { UserModule } from "src/user/user.module";
 import { AuthService } from "./auth.service"
 import { PassportModule } from "@nestjs/passport"
@@ -22,7 +22,7 @@ import { APP_GUARD } from '@nestjs/core';
       ttl: 1 * 60,
       limit: 100, // 请求10次
     }),
-    UserModule,
+    forwardRef(() => UserModule),
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

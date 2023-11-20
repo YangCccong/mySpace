@@ -5,6 +5,8 @@ import { Menu, MenuDocument } from './schemas/menu.schema';
 
 import { SaveMenuDto } from './dto/save-menu.dto';
 import { RemoveMenuDto } from './dto/remove-menu.dto';
+import { arrToTree } from '../utils/index'
+
 @Injectable()
 export class MenusService {
     constructor(@InjectModel('Menu') private menuModel: Model<MenuDocument>){}
@@ -22,10 +24,15 @@ export class MenusService {
     async removeCurrentMenu(RemoveMenuDto: RemoveMenuDto) {
         const { _id } = RemoveMenuDto
         return this.menuModel.findByIdAndRemove({ _id });
-        // return this.menuModel.deleteOne(RemoveMenuDto);
     }
     
     async menusList(): Promise<Menu[]> {
         return await this.menuModel.find().exec()
+    }
+
+    // 通过菜单ID获取菜单
+    async getMenuInfoByMenuId(menuIds) {
+        const menusList = await this.menuModel.find({ _id: { $in: menuIds }})
+        return arrToTree(menusList, { parentId: 'parentId', id: '_id' })
     }
 }
