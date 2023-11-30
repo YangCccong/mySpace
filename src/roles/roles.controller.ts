@@ -28,8 +28,21 @@ export class RolesController {
     @UseGuards(AuthGuard('jwt'))
 
     async saveRole(@Body() saveRoleDto: SaveRoleDto) {
-        console.log(SaveRoleDto)
+        console.log(saveRoleDto,'====>>> ')
         const { _id, routes } = saveRoleDto
+        let id = _id || ''
+        let role = undefined
+        if(id) {
+            console.log(id,1)
+            role = await this.rolesService.updataRole(saveRoleDto)
+        } else {
+            console.log(id,2)
+            delete saveRoleDto._id
+            role = await this.rolesService.saveRole(saveRoleDto)
+            console.log(role, 'role === ')
+        }
+        console.log(role, '当前角色 ====>>>> ')
+        await this.RoleMenusService.removeRoleMenus(id);
         const promises = routes.map(menuId => {
             return this.RoleMenusService.createRoleMenus({ roleId: _id, menuId })
         })
@@ -51,5 +64,14 @@ export class RolesController {
     @UseGuards(AuthGuard('jwt'))
     async rolesList() {
         return this.rolesService.rolesList()
+    }
+
+    @ApiOperation({ summary: '当前角色菜单', description: ''})
+    @Post('/role-menus')
+    @UseGuards(AuthGuard('jwt'))
+    async rolesMenus(@Body() currentRole) {
+        // console.log(currentRoleId)
+        const { currentRoleId } = currentRole
+        return this.rolesService.getRoleInfoByIds([currentRoleId])
     }
 }

@@ -17,4 +17,9 @@ export class UserRolesService {
         console.log(userId)
         return this.UserRolesModel.find(userId);
     }
+    // 删除当前用户关联角色
+
+    async removeUserRole(userId) {
+        return this.UserRolesModel.deleteMany({ userId });
+    }
 }

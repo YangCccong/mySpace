@@ -24,17 +24,15 @@ export class UserService {
   async removeCurrentUser(removeRoleDto) {
     const { _id } = removeRoleDto
     return this.userModel.findByIdAndRemove({ _id });
-    // return this.userModel.deleteOne(removeRoleDto);
   }
 
   async usersList(): Promise<User[]> {
-    return this.userModel.find().exec()
+    return this.userModel.find({}, { password: 0 }).exec()
   }
 
   async createAssignRoles(UserRoles: any): Promise<[]> {
     console.log(UserRoles, 'user_roles ===>>> ')
     return UserRoles
-    // return this.userRolesModel.create(UserRoles);
   }
 
   async getUser(query: object): Promise<User> {

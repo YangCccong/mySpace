@@ -15,13 +15,13 @@ export class CreateUserDto {
     username: string;
 
     @ApiProperty({ description: '密码', default: '123456' })
-    @IsNotEmpty({ message: '密码不能为空' })
-    @MinLength(6, {
-        message: '密码长度不能小于6位',
-    })
-    @MaxLength(20, {
-        message: '密码长度不能超过20位',
-    })
+    // @IsNotEmpty({ message: '密码不能为空' })
+    // @MinLength(6, {
+    //     message: '密码长度不能小于6位',
+    // })
+    // @MaxLength(20, {
+    //     message: '密码长度不能超过20位',
+    // })
     password: string;
 
     @ApiProperty({ description: '姓名', default: '张三' })

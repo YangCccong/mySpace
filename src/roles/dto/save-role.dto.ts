@@ -6,5 +6,5 @@ export class SaveRoleDto {
     modifyBy?: string;
     createTime?: string;
     modifyTime?: string;
-    routes: [];
+    routes?: [];
 }

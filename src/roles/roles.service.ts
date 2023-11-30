@@ -11,6 +11,7 @@ export class RolesService {
     constructor(@InjectModel('Role') private roleModel: Model<RoleDocument>, private RoleMenusService: RoleMenusService) { }
 
     async saveRole(SaveRoleDto: SaveRoleDto) {
+        console.log(SaveRoleDto, 'SaveRoleDto === ')
         const createdCat = new this.roleModel(SaveRoleDto);
         return createdCat.save();
     }
@@ -26,15 +27,14 @@ export class RolesService {
     }
 
     async rolesList(): Promise<Role[]> {
-        return this.roleModel.find().exec()
+        return this.roleModel.find({}, { routes: 0, __v: 0 }).exec()
     }
 
     async getRoleInfoByIds(roleIds) {
         const roles = await this.roleModel.find({ _id: { $in: roleIds }}, {name: 1, _id: 0})
-        console.log(roleIds, roles)
-        const menus = await this.RoleMenusService.getMenuIdsByRoleId(roleIds)
-        console.log(menus, 'menus ====>>> ')
+        const { menus, menuIds } = await this.RoleMenusService.getMenuIdsByRoleId(roleIds)
         return {
+            menuIds,
             roles,
             menus
         }

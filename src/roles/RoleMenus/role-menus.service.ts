@@ -11,12 +11,18 @@ export class RoleMenusService {
         return this.RoleMenusModel.create(userRole);
     }
 
+    // 删除当前角色关联菜单
+
+    async removeRoleMenus(roleId) {
+        return this.RoleMenusModel.deleteMany({ roleId });
+    }
+
     // 通过角色获取对应菜单
     async getMenuIdsByRoleId(roleIds) {
         const roleMenus = await this.RoleMenusModel.find({ roleId: { $in: roleIds }});
         const menuIds = roleMenus.map(item => item.menuId)
         const menus = await this.MenusService.getMenuInfoByMenuId(menuIds)
         console.log(menus, 'menus')
-        return menus
+        return { menus, menuIds}
     }
 }
