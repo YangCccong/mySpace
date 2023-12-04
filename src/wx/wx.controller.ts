@@ -13,6 +13,6 @@ export class WxController {
 
   @Get('/setting')
   setting(@Query() query) {
-    return true
+    return false
   }
 }
