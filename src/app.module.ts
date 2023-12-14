@@ -12,6 +12,9 @@ import { MenusModule } from './menus/menus.module';
 import { WxModule } from './wx/wx.module';
 import { ArticleModule } from './article/article.module';
 
+
+import { ArticleTagModule } from './article/articleTag/article-tag.module'
+
 /**
  * 应用程序的根模块
  */
@@ -28,7 +31,8 @@ import { ArticleModule } from './article/article.module';
     UserModule,
     AuthModule,
     WxModule,
-    ArticleModule
+    ArticleModule,
+    ArticleTagModule
   ],
   controllers: [AppController],
   providers: [

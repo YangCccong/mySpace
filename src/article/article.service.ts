@@ -20,10 +20,13 @@ export class ArticleService {
     async removeCurrentMenu(RemoveMenuDto) {
         const { _id } = RemoveMenuDto
         return this.articleModel.findByIdAndRemove({ _id });
-        // return this.menuModel.deleteOne(RemoveMenuDto);
     }
     
     async menusList() {
         return await this.articleModel.find().exec()
+    }
+
+    async articleInfo(_id) {
+        return await this.articleModel.find({ _id}).exec()
     }
 }

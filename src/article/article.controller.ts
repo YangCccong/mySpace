@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { ArticleService } from './article.service'
 import { ArticleDto, RemoveArticleDto } from './dto/article.dto'
 import * as _ from 'lodash';
@@ -36,5 +36,16 @@ export class ArticleController {
     @Get('/article-lists')
     async menusList() {
         return await this.articleService.menusList()
+    }
+
+    @ApiOperation({ summary: '文章详情', description: ''})
+    @Get('/info')
+    async articleInfo(@Query() query) {
+        console.log(query)
+        const { id } = query
+        const infoList =  await this.articleService.articleInfo(id)
+        return {
+            article: infoList[0]
+        }
     }
 }
