@@ -14,13 +14,13 @@ import { ArticleModule } from './article/article.module';
 
 
 import { ArticleTagModule } from './article/articleTag/article-tag.module'
-
+import { ArticleCategoryModule } from './article/articleCategory/article-category.module';
 /**
  * 应用程序的根模块
  */
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+  ConfigModule.forRoot(),
     MongooseModule.forRoot(`mongodb://localhost`, {
       dbName: 'my-space',
       user: 'root',
@@ -32,7 +32,9 @@ import { ArticleTagModule } from './article/articleTag/article-tag.module'
     AuthModule,
     WxModule,
     ArticleModule,
-    ArticleTagModule
+    
+    ArticleTagModule,
+    ArticleCategoryModule,
   ],
   controllers: [AppController],
   providers: [
