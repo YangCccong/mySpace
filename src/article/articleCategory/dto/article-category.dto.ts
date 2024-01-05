@@ -20,16 +20,16 @@ export class ArticleCategoryDto {
     @IsNotEmpty({ message: '请输入分类类型' })
     type: string;
 
-
+    @IsNotEmpty({ message: '请输入父级菜单' })
     @ApiProperty({ description: '父级菜单', default: '' })
     parentId: string;
 
     @ApiProperty({ description: '排序', default: 1 })
     sort: number;
 
+    @IsNotEmpty({ message: '请选择状态' })
     @ApiProperty({ description: '状态', default: true })
-    state: boolean;
-
+    state: boolean | string;
 }
 
 export class RemoveArticleCategoryDto {

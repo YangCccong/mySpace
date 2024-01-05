@@ -15,6 +15,7 @@ import { ArticleModule } from './article/article.module';
 
 import { ArticleTagModule } from './article/articleTag/article-tag.module'
 import { ArticleCategoryModule } from './article/articleCategory/article-category.module';
+import { MessageBoardModule } from './message-board/message-board.module';
 /**
  * 应用程序的根模块
  */
@@ -35,6 +36,7 @@ import { ArticleCategoryModule } from './article/articleCategory/article-categor
     
     ArticleTagModule,
     ArticleCategoryModule,
+    MessageBoardModule,
   ],
   controllers: [AppController],
   providers: [
